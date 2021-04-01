@@ -10,7 +10,7 @@ import { CookieModule } from 'ngx-cookie';
   imports: [
     UserRoutingModule,
     SharedModule,
-    CookieModule.forRoot(),
+    CookieModule.forRoot()
   ]
 })
 export class UserModule { }
