@@ -19,7 +19,6 @@ export class AddUpdateEmployeeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // debugger
     this.empId = this.activatedRoute.snapshot.params.id
     if (this.empId) {
       this.appService.getEmployeeByID(this.empId).subscribe((result) => {

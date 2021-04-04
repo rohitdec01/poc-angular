@@ -21,15 +21,15 @@ export class HeaderComponent implements OnInit {
   }
 
   get showAfterLogin(): boolean {
-    return true;//  this.userDetail && this.userDetail.token
+    return this.userDetail && this.userDetail.token
   }
 
   get hideAfterLogin(): boolean {
-    return true;// !this.userDetail || !this.userDetail.token
+    return !this.userDetail || !this.userDetail.token
   }
 
   get showIfAdmin(): boolean {
-    return true;// this.showAfterLogin && this.userDetail.roles.includes('admin')
+    return this.showAfterLogin && this.userDetail.roles.includes('admin')
   }
 
 }
