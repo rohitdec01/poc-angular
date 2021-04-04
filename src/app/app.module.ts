@@ -9,6 +9,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieModule } from 'ngx-cookie';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { LoggingInterceptor } from './interceptors/logging.interceptor';
     //EmployeeModule, // Note: We should not add this to support lazy loading. See app routing module
     //AdminModule, // Note: We should not add this to support lazy loading. See app routing module
     //UserModule, //  Note: We should not add this to support lazy loading. See app routing module
-    AppRoutingModule, // Note: This should be last because of wild card route other wise it will always gona land in winld card route
+    AppRoutingModule,
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]), // Note: This should be last because of wild card route other wise it will always gona land in winld card route
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
