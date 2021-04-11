@@ -31,8 +31,8 @@ import { EffectsModule } from '@ngrx/effects';
     //AdminModule, // Note: We should not add this to support lazy loading. See app routing module
     //UserModule, //  Note: We should not add this to support lazy loading. See app routing module
     AppRoutingModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([]), // Note: This should be last because of wild card route other wise it will always gona land in winld card route
+    StoreModule.forRoot({}, {}), //  Note: initilize the store in the root application module 
+    EffectsModule.forRoot([]),
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

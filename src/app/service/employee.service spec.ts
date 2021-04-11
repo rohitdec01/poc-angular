@@ -8,7 +8,7 @@ describe('AppService', () => {
   let httpMock: HttpTestingController
 
   const data = {
-    employee: [
+    employees: [
       {
         id: 1,
         name: 'Aaron',
