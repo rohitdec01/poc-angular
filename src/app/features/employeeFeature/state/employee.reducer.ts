@@ -1,5 +1,5 @@
 import { createAction, on, createReducer, createFeatureSelector, createSelector } from "@ngrx/store";
-import { EmployeeService } from "src/app/service/Employee.service";
+import { Action } from "rxjs/internal/scheduler/Action";
 import * as AppState from '../../../state/app.state';
 import { Employee } from '../Employee';
 import * as EmployeeActions from './employee.actions';
@@ -27,18 +27,15 @@ export const getEmployeesSelector = createSelector(
 
 export const employeeReducer = createReducer<EmployeeState>(
     initialState,
-    on(EmployeeActions.employeeAction, (state): EmployeeState => {
+    on(EmployeeActions.loadEmployeesAction, (state): EmployeeState => {
         return { // Note: return the new state of the object
+            ...state
+        }
+    }),
+    on(EmployeeActions.loadEmployeesSuccessAction, (state, action): EmployeeState => {
+        return {
             ...state,
-            employees: [
-                {
-                    id: 1,
-                    name: "from store",
-                    address: "Chicago IL",
-                    mobile: "33333333",
-                    email: "test3@test3.com"
-                }
-            ]
+            employees: action.employees
         }
     })
-)
+);

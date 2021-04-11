@@ -1,7 +1,12 @@
-import { createAction } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
+import { Employee } from "../Employee";
 
 // Note: Actions can have two arguments. 
-// Second argument can have associate data which will define using props. Fo now this is not needed. 
-export const employeeAction = createAction(
-    '[employees] list of employees'
-)
+export const loadEmployeesAction = createAction('[employees] load employees');
+
+// Note: Second argument is associate data which defines using props.
+export const loadEmployeesSuccessAction = createAction('[employees] load employees success',
+    props<{ employees: Employee[] }>()
+);
+
+export const loadEmployeesFailure = createAction('[employees] load employees failture');

@@ -11,7 +11,7 @@
     </thead>
   
     <tbody id="employeeTableBody">
-    <tr *ngFor="let employee of employees">
+    <tr *ngFor="let employee of employees$ | async as employees">
       <td>{{employee.id}}</td>
       <td>{{employee.name}}</td>
       <td>{{employee.address}}</td>

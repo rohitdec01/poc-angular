@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { EmployeeService } from 'src/app/service/Employee.service';
-import { employeeAction } from '../state/employee.actions';
 import { getEmployeesSelector, State } from '../state/employee.reducer';
 import * as EmployeeActions from '../state/employee.actions';
-
+import { Observable } from 'rxjs';
+import { Employee } from '../Employee';
 
 @Component({
   selector: 'app-list-employee',
@@ -13,33 +12,28 @@ import * as EmployeeActions from '../state/employee.actions';
 })
 export class ListEmployeeComponent implements OnInit {
 
-  public employees: any
+  public employees$: Observable<Employee[]>
 
-  constructor(private appService: EmployeeService, private store: Store<State>) {
+  constructor(private store: Store<State>) {
   }
 
   ngOnInit(): void {
-    // this.getEmployeeList()
-    this.store.select(getEmployeesSelector).subscribe(
-      employees => {
-        this.employees = employees;
-        console.log('list of employees', employees);
-      }
-    )
-    this.store.dispatch(EmployeeActions.employeeAction());
+    this.employees$ = this.store.select(getEmployeesSelector);
+    this.store.dispatch(EmployeeActions.loadEmployeesAction());
   }
 
-  deleteEmployee(id: any) {
+  /*deleteEmployee(id: any) {
     this.appService.deleteEmployee(id).subscribe((result) => {
       this.getEmployeeList()
       console.log('Employee Deleted.') // fetch employee list again.
     })
-  }
+  }*/
 
-  getEmployeeList() {
+  // Note: Now we are getting list using ngrxEffect 
+  /*getEmployeeList() {
     this.appService.getEmployeeList().subscribe((result) => {
       this.employees = result
     })
-  }
+  }*/
 }
 
