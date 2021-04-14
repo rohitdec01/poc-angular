@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { EmployeeService } from 'src/app/service/Employee.service';
-import * as EmployeeActions from '../state/employee.actions';
+import * as EmployeeActions from './employee.actions';
 import { map, mergeMap } from 'rxjs/operators';
 
 @Injectable()

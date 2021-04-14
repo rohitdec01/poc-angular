@@ -11,6 +11,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { RootStoreModule } from './store/root-store.module';
 
 @NgModule({
   declarations: [
@@ -31,8 +32,7 @@ import { EffectsModule } from '@ngrx/effects';
     //AdminModule, // Note: We should not add this to support lazy loading. See app routing module
     //UserModule, //  Note: We should not add this to support lazy loading. See app routing module
     AppRoutingModule,
-    StoreModule.forRoot({}, {}), //  Note: initilize the store in the root application module 
-    EffectsModule.forRoot([]),
+    RootStoreModule // Note: Initialize the root store module for ngrx
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

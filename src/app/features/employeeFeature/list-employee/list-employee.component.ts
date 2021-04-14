@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { getEmployeesSelector, State } from '../state/employee.reducer';
-import * as EmployeeActions from '../state/employee.actions';
+import { getEmployeesSelector, State } from '../store/employee.reducer';
+import * as EmployeeActions from '../store/employee.actions';
 import { Observable } from 'rxjs';
 import { Employee } from '../Employee';
 
