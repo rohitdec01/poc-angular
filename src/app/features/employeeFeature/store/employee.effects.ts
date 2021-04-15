@@ -12,7 +12,7 @@ export class EmployeeEffects {
         return this.actions$.pipe(
             ofType(EmployeeActions.loadEmployeesAction),
             mergeMap(() => this.employeeService.getEmployeeList().pipe(
-                map(employees => EmployeeActions.loadEmployeesSuccessAction({ employees }))
+                map(employeeLst => EmployeeActions.loadEmployeesSuccessAction({ employeeLst }))
             ))
         )
     })

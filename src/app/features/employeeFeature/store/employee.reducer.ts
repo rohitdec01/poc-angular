@@ -1,5 +1,4 @@
 import { createAction, on, createReducer, createFeatureSelector, createSelector } from "@ngrx/store";
-import { Action } from "rxjs/internal/scheduler/Action";
 import * as AppState from '../../../store/app.state';
 import { Employee } from '../Employee';
 import * as EmployeeActions from './employee.actions';
@@ -11,12 +10,13 @@ export interface State extends AppState.state { // extend  main application stat
 }
 
 export interface EmployeeState {
-    employees: Employee[]
+    employeeLst: Employee[]
 }
 
 const initialState: EmployeeState = {
-    employees: []
+    employeeLst: []
 }
+
 
 // Note: Selector is a kind of query in the store. This will return the whole employee state
 const getEmployeeFeatureState = createFeatureSelector<EmployeeState>(employeeFeatureKey);
@@ -24,7 +24,7 @@ const getEmployeeFeatureState = createFeatureSelector<EmployeeState>(employeeFea
 // Note: Get list of employee using selector from the above employeeFeatureState
 export const getEmployeesSelector = createSelector(
     getEmployeeFeatureState,
-    state => state.employees
+    state => state.employeeLst
 )
 
 export const employeeReducer = createReducer<EmployeeState>(
@@ -37,7 +37,7 @@ export const employeeReducer = createReducer<EmployeeState>(
     on(EmployeeActions.loadEmployeesSuccessAction, (state, action): EmployeeState => {
         return {
             ...state,
-            employees: action.employees
+            employeeLst: action.employeeLst
         }
     })
 );
