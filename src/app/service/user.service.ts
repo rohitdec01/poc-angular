@@ -24,7 +24,7 @@ export class UserService {
     return this.http.get(`${this.USER_URL}?user=${email}&password=${password}`, {headers: {Anonymous: 'undefined'}})
   }
 
-  getUserDetail(token): Observable<any> {
+  getUserDetail(token: string): Observable<any> {
     return this.http.get(`${this.USER_URL}?token=${token}`)
   }
 
