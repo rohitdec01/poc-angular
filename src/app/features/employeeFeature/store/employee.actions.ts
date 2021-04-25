@@ -1,12 +1,20 @@
 import { createAction, props } from "@ngrx/store";
 import { Employee } from "../Employee";
 
-// Note: Actions can have two arguments. 
+// ******************** Load Actions *******************************
 export const loadEmployeesAction = createAction('[employeeLst] load employees');
-
-// Note: Second argument is associate data which defines using props.
 export const loadEmployeesSuccessAction = createAction('[employeeLst] load employees success',
     props<{ employeeLst: Employee[] }>()
 );
+export const loadEmployeesFailure = createAction('[employeeLst] load employees failture',
+    props<{ error: string }>());
 
-export const loadEmployeesFailure = createAction('[employeeLst] load employees failture');
+// ************************* Delete Actions ***************************************************
+export const deleteEmployee = createAction('[deleteEmployee employee delete action',
+    props<{ employeeId: number }>())
+export const deleteEmployeeSuccessAction = createAction('[deleteEmployee] employee delete action success',
+    props<{ employeeId: number }>())
+export const deleteEmployeeFailtureAction = createAction('[deleteEmployee] employee delete action failture',
+    props<{ error: string }>())
+// ******************************************************************************************
+

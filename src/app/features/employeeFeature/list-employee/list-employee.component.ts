@@ -22,12 +22,13 @@ export class ListEmployeeComponent implements OnInit {
     this.store.dispatch(EmployeeActions.loadEmployeesAction());
   }
 
-  /*deleteEmployee(id: any) {
-    this.appService.deleteEmployee(id).subscribe((result) => {
+  deleteEmployee(id: any) {
+    this.store.dispatch(EmployeeActions.deleteEmployee({ employeeId: id }));
+    /*this.appService.deleteEmployee(id).subscribe((result) => {
       this.getEmployeeList()
       console.log('Employee Deleted.') // fetch employee list again.
-    })
-  }*/
+    })*/
+  }
 
   // Note: Now we are getting list using ngrxEffect 
   /*getEmployeeList() {

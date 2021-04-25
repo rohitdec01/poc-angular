@@ -12,7 +12,7 @@ export class UserEffects {
     loginUser$ = createEffect(() => {
         return this.actions$.pipe(
             ofType(UserLoginAction.userLoginAction),
-            mergeMap(() => this.userService.getAuthToken('test', 'test').pipe(
+            mergeMap((action) => this.userService.getAuthToken(action.userName, action.password).pipe(
                 // Note: we will only get token from this request because in reality we will get only token from this type of request after login.
                 map(user => {
                     const token: string = user[0].token;

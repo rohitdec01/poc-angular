@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   email: string
   password: string
 
-  constructor(private userService: UserService, private router: Router, private store: Store<State> ) {
+  constructor(private userService: UserService, private router: Router, private store: Store<State>) {
   }
 
   ngOnInit(): void {
@@ -22,7 +22,12 @@ export class LoginComponent implements OnInit {
 
   logInHandler() {
 
-    this.store.dispatch(UserActions.userLoginAction());
+    this.store.dispatch(UserActions.userLoginAction(
+      {
+        userName: this.email,
+        password: this.password
+      }
+    ));
 
     /*this.userService.getAuthToken(this.email, this.password).subscribe((result) => {
       if (result.length > 0) { // In reality it will always return one JWT token bases on the user/password.
