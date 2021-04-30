@@ -17,7 +17,6 @@ const initialState: EmployeeState = {
     employeeLst: []
 }
 
-
 // Note: Selector is a kind of query in the store. This will return the whole employee state
 const getEmployeeFeatureState = createFeatureSelector<EmployeeState>(employeeFeatureKey);
 
@@ -42,8 +41,14 @@ export const employeeReducer = createReducer<EmployeeState>(
     }),
     on(EmployeeActions.deleteEmployeeSuccessAction, (state, action): EmployeeState => {
         return {
-          ...state,
-          employeeLst: state.employeeLst.filter(employee => employee.id != action.employeeId)
+            ...state,
+            employeeLst: state.employeeLst.filter(employee => employee.id != action.employeeId)
         };
-      }),
+    }),
+    on(EmployeeActions.addEmployeeSuccessAction, (state, action): EmployeeState => {
+        return {
+            ...state,
+            employeeLst: [...state.employeeLst, action.employee]
+        };
+    })
 );

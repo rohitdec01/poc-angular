@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { EmployeeService } from 'src/app/service/Employee.service';
+import { getEmployeesSelector, State } from '../store/employee.reducer';
+import * as EmployeeActions from '../store/employee.actions';
 
 @Component({
   selector: 'app-add-update-employee',
@@ -15,7 +18,8 @@ export class AddUpdateEmployeeComponent implements OnInit {
 
   employeeFormGroup: FormGroup
 
-  constructor(private appService: EmployeeService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {
+  constructor(private store: Store<State>, private appService: EmployeeService, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder) {
+    
   }
 
   ngOnInit(): void {
@@ -46,6 +50,11 @@ export class AddUpdateEmployeeComponent implements OnInit {
           Validators.pattern('[ -~]*')])]
       })
     }
+
+    this.store.select(getEmployeesSelector).subscribe(() => {
+      this.flag = true
+      this.employeeFormGroup.reset({})
+    });
   }
 
   addEmployee() {
@@ -55,10 +64,17 @@ export class AddUpdateEmployeeComponent implements OnInit {
         this.employeeFormGroup.reset({})
       })
     } else {
-      this.appService.addEmployee(this.employeeFormGroup.value).subscribe((result) => {
-        this.flag = true
-        this.employeeFormGroup.reset({})
-      })
+      this.store.dispatch(EmployeeActions.addEmployee(
+        {employee: this.employeeFormGroup.value }
+      ));
+
+      // Note: For form reset stuff I have subscribed the store in the init and done the operation there.
+    
+
+      /* this.appService.addEmployee(this.employeeFormGroup.value).subscribe((result) => {
+         this.flag = true
+         this.employeeFormGroup.reset({})
+       })*/
     }
   }
 

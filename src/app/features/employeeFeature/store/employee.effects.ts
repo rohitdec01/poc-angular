@@ -29,4 +29,16 @@ export class EmployeeEffects {
             )
         )
     })
+
+    addEmployee$ = createEffect(() => {
+        return this.actions$.pipe(
+            ofType(EmployeeActions.addEmployee),
+            mergeMap(action =>
+                this.employeeService.addEmployee(action.employee).pipe(
+                    map((employee) => EmployeeActions.addEmployeeSuccessAction({ employee: employee })),
+                    catchError(error => of(EmployeeActions.addEmployeeFailtureAction({ error })))
+                )
+            )
+        )
+    })
 }
