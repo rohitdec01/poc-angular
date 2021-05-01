@@ -20,6 +20,7 @@ export class UserEffects {
 
                     this.userService.saveUserDetail(user);
                             this.router.navigate(['employees']);
+                            this.userService.userDetailsCache.next(user[0])
                             return UserLoginAction.getUserDetailSuccessAction({
                                 user: user[0]
                             })
