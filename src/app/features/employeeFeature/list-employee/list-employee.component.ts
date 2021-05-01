@@ -23,7 +23,7 @@ export class ListEmployeeComponent implements OnInit {
   }
 
   deleteEmployee(id: any) {
-    this.store.dispatch(EmployeeActions.deleteEmployee({ employeeId: id }));
+    this.store.dispatch(EmployeeActions.deleteEmployeeAction({ employeeId: id }));
     /*this.appService.deleteEmployee(id).subscribe((result) => {
       this.getEmployeeList()
       console.log('Employee Deleted.') // fetch employee list again.

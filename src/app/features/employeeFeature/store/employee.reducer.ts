@@ -1,3 +1,4 @@
+import { state } from "@angular/animations";
 import { createAction, on, createReducer, createFeatureSelector, createSelector } from "@ngrx/store";
 import * as AppState from '../../../store/app.state';
 import { Employee } from '../Employee';
@@ -26,6 +27,11 @@ export const getEmployeesSelector = createSelector(
     state => state.employeeLst
 )
 
+export const getEmployeeByIdSelector = createSelector(
+    getEmployeeFeatureState,
+    (state, empId) => state.employeeLst.filter(employee => employee.id === empId)
+)
+
 export const employeeReducer = createReducer<EmployeeState>(
     initialState,
     on(EmployeeActions.loadEmployeesAction, (state): EmployeeState => {
@@ -49,6 +55,14 @@ export const employeeReducer = createReducer<EmployeeState>(
         return {
             ...state,
             employeeLst: [...state.employeeLst, action.employee]
+        };
+    }),
+    on(EmployeeActions.updateEmployeeSuccessAction, (state, action): EmployeeState => {
+        const updatedProducts = state.employeeLst.map(
+            item => action.employee.id === item.id ? action.employee : item);
+        return {
+            ...state,
+            employeeLst: updatedProducts
         };
     })
 );
