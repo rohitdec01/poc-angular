@@ -1,4 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
+import { Store } from '@ngrx/store'
+import { State } from '../employeeFeature/store/employee.reducer'
+import { userSelector } from '../userFeature/store/user.reducer'
 
 @Component({
   selector: 'app-header',
