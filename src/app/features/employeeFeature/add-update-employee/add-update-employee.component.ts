@@ -49,12 +49,15 @@ export class AddUpdateEmployeeComponent implements OnInit {
           Validators.email,
           Validators.minLength(5),
           Validators.pattern('[ -~]*')])]
-      })
+      })  
     }
 
     this.store.select(getEmployeesSelector).subscribe(() => {
-      this.flag = true
-      this.employeeFormGroup.reset({})
+      if (this.employeeFormGroup) {
+        this.flag = true
+        this.employeeFormGroup.reset({})
+      }
+
     });
   }
 
